@@ -104,19 +104,18 @@ router.delete('/:pid', async (req, res) => {
         if (!productFind) {
             return res.status(404).json({ error: `The product with id ${productId} does not exist` })
         }
-        
         const deletedProduct = await productManager.deleteProduct(productId)
-        console.log(deletedProduct)
-        
         const updatedProducts = await productManager.getProducts()
-        
-        req.app.get('socketio').emit('updatedProducts', updatedProducts)
+        socketServer.emit('deleteProduct', productId);
+        socketServer.emit("updatedProducts", updatedProducts)
+
 
         res.status(200).json({ message: `Product with id ${productId} removed successfully`, products: await productManager.getProducts() })
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: error })
     }
+
 })
 
 export default router
