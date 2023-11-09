@@ -79,7 +79,7 @@ function deleteProduct(id) {
     }
 }
 
-socket.on('updatedProducts', (products) => {
+socket.emit('updatedProducts', (products) => {
     tbody.innerHTML = '';
 
     products.forEach(item => {

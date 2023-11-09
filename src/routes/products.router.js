@@ -95,6 +95,7 @@ router.put('/:pid', async (req, res) => {
     }
 })
 
+
 router.delete('/:pid', async (req, res) => {
     try {
         const productId = parseInt(req.params.pid) 
