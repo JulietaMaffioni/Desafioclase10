@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { productManager } from '../controllers/ProductManager.js'
+import { socketServer } from '../app.js';
 
 const router = Router()
 
@@ -56,7 +57,7 @@ router.post('/', async (req, res) => {
         if (addedProduct) {
             const products = await productManager.getProducts()
             
-            req.app.get('socketio').emit('updatedProducts', products)
+            socketServer.emit('updateProducts', products)
             
             return res.status(201).json({ message: `Product with id ${addedProduct.id} added successfully`, product: addedProduct })
         }

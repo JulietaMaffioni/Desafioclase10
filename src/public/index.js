@@ -62,7 +62,6 @@ form.addEventListener('submit', async (e) => {
         }
     } catch (error) {
         console.log(error);
-        displayToast('Failed to create a new product', '#DC143C');
     }
 });
 
@@ -79,7 +78,7 @@ function deleteProduct(id) {
     }
 }
 
-socket.emit('updatedProducts', (products) => {
+socket.on('updatedProducts', (products) => {
     tbody.innerHTML = '';
 
     products.forEach(item => {
