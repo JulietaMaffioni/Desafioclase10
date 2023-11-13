@@ -53,13 +53,13 @@ router.post('/', async (req, res) => {
             stock,
             (status = true)
         )
-        
         if (addedProduct) {
             const products = await productManager.getProducts()
             
             socketServer.emit('updateProducts', products)
             
-            return res.status(201).json({ message: `Product with id ${addedProduct.id} added successfully`, product: addedProduct })
+            return res.status(201).json({ message: `Product with id ${addedProduct.id} added successfully`, product: addedProduct,
+         })
         }
         return res.status(404).json({ error: 'Error adding product' })
     } catch (error) {
